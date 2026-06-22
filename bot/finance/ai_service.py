@@ -19,7 +19,7 @@ Nếu không thể xác định được số tiền hoặc hạng mục, hãy c
 async def parse_expense_text(text: str) -> Optional[Dict]:
     """Parse expense from free-text using Gemini."""
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.0-flash')
         response = model.generate_content([PROMPT, text])
         result_text = response.text.strip()
         
@@ -38,7 +38,7 @@ async def parse_expense_text(text: str) -> Optional[Dict]:
 async def parse_expense_image(image_bytes: bytes, mime_type: str) -> Optional[Dict]:
     """Parse expense from an image using Gemini multimodal."""
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.0-flash')
         
         # Prepare the image part
         image_part = {
