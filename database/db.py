@@ -12,7 +12,8 @@ async def get_db_pool():
     if not DATABASE_URL:
         logger.error("SUPABASE_DATABASE_URL is not set.")
         raise ValueError("SUPABASE_DATABASE_URL is not set.")
-    return await asyncpg.create_pool(DATABASE_URL)
+    # Disable statement cache to remain compatible with Supabase connection pooler (port 6543)
+    return await asyncpg.create_pool(DATABASE_URL, statement_cache_size=0)
 
 async def init_db(pool):
     """Initialize database tables if they do not exist."""
